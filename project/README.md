@@ -1,6 +1,9 @@
 # Spencer and Williams E-commerce Search
 
-A sophisticated e-commerce search implementation featuring Algolia's InstantSearch.js, React, and TypeScript. This project demonstrates a production-ready search interface with advanced filtering, faceting, and view customization options.
+A sophisticated e-commerce search implementation featuring Algolia's InstantSearch.js, React, and TypeScript. 
+
+This technical assignment demonstrates a production-ready search interface with advanced filtering, faceting, and view customization options.
+
 
 ## Features
 
@@ -14,17 +17,19 @@ A sophisticated e-commerce search implementation featuring Algolia's InstantSear
 - **Dual View Options**:
   - Grid View: Compact display showing essential product information
   - List View: Detailed view with expanded product descriptions
+
 - **Product Cards Include**:
-  - High-resolution product image
+  - product image
   - Product name with highlight support
   - Brand information
   - Price display
   - Category tags
   - Star rating visualization
-  - Product description (in list view)
-  - Hover effects and transitions
+  - Product description (list view)
+
 
 ### Filtering System
+
 - **Multiple Filter Types**:
   - Brand filter with search capability
   - Category filter with hierarchical support
@@ -38,7 +43,7 @@ A sophisticated e-commerce search implementation featuring Algolia's InstantSear
 ### Responsive Design
 - Fully responsive layout adapting to all screen sizes
 - Grid system adjusts columns based on viewport width
-- Mobile-friendly filters and search interface
+
 
 ## Technical Implementation
 
@@ -47,7 +52,7 @@ A sophisticated e-commerce search implementation featuring Algolia's InstantSear
 - **TypeScript**: Type safety and enhanced development experience
 - **Vite**: Build tool and development server
 - **Tailwind CSS**: Utility-first styling
-- **Algolia**: Search backend and InstantSearch components
+- **Algolia**: Search backend and InstantSearch component
 
 ### Project Structure
 ```
@@ -69,7 +74,8 @@ src/
 └── main.tsx               # Application entry point
 ```
 
-### Algolia Configuration
+
+## Indexing Settings/Instructions
 
 #### Index Settings
 ```typescript
@@ -119,106 +125,127 @@ src/
 }
 ```
 
-## Setup Instructions
 
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
-- Algolia account
+### Setting Up Environment Variables
 
-### Environment Setup
-1. Create a `.env` file in the root directory:
-```env
-VITE_ALGOLIA_APP_ID=your_app_id_here
-VITE_ALGOLIA_SEARCH_API_KEY=your_search_only_api_key_here
-VITE_ALGOLIA_INDEX_NAME=your_index_name_here
-ALGOLIA_ADMIN_API_KEY=your_admin_api_key_here
-```
+1. Create a `.env` file in the root directory using `.env.example` as a template:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Fill in your Algolia credentials in `.env`:
+   ```env
+   # Public variables (used by the frontend)
+   VITE_ALGOLIA_APP_ID=app_id_here
+   VITE_ALGOLIA_SEARCH_API_KEY=search_only_api_key_here
+   VITE_ALGOLIA_INDEX_NAME=index_name_here
+
+   # Private variables (used only for indexing)
+   ALGOLIA_ADMIN_API_KEY=your_admin_api_key_here
+   ```
+
+   ⚠️ **IMPORTANT**: 
+   - Never commit your `.env` file to version control
+   - Keep admin API key private and secure
+   - The search-only API key is public and safe to use in the frontend
 
 ### Installation
-1. Clone the repository:
+  1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/spencer-and-williams.git
-cd spencer-and-williams
-```
+  git clone https://github.com/juangpartida/juangpartida-dse-algoliasearch-demo.git
+  cd juangpartida-dse-algoliasearch-demo
+  ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+  2. Install dependencies:
+  ```bash
+  npm install
+  ```
 
-3. Index the product data:
-```bash
-npm run index-data
-```
+  3. Index the product data:
+  ```bash
+  npm run index-data
+  ```
 
-4. Start the development server:
-```bash
-npm run dev
-```
+  4. Start the development server:
+  ```bash
+  npm run dev
+  ```
 
-### Deployment
-The project is configured for GitHub Pages deployment:
+  ### Deployment
+  The project is configured for GitHub Pages deployment:
 
-1. Update the base URL in `vite.config.ts` if needed:
+    1. Update the base URL in `vite.config.ts` if needed:
+    ```typescript
+    base: '/juangpartida-dse-algoliasearch-demo/'
+    ```
+
+    2. Deploy to GitHub Pages:
+    ```bash
+    npm run deploy
+
+### Running the Indexing Script
+
+The indexing script is written in TypeScript and located in `scripts/index.ts`. It:
+- Reads product data from `src/data/products.json`
+- Configures index settings for optimal search relevance
+- Uploads the data to your Algolia index
+
+To run the indexing script:
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Run the indexing script:
+   ```bash
+   npm run index-data
+   ```
+
+### Customizing the Index
+
+The script configures several important index settings:
+
 ```typescript
-base: '/spencer-and-williams/'
+{
+  searchableAttributes: [
+    'name',
+    'brand',
+    'categories',
+    'description'
+  ],
+  attributesForFaceting: [
+    'searchable(brand)',
+    'searchable(categories)',
+    'filterOnly(rating)'
+  ],
+  customRanking: [
+    'desc(rating)',
+    'desc(popularity)',
+    'desc(price)'
+  ]
+}
 ```
 
-2. Deploy to GitHub Pages:
-```bash
-npm run deploy
-```
+Modify these settings in `scripts/index.ts` to adjust search relevance and filtering capabilities.
 
-## Security Considerations
+### Using Your Own Data
 
-### API Keys
-- Admin API key is used only for indexing and stored in `.env`
-- Search-only API key is public and has restricted permissions
-- Environment variables are properly handled using Vite's env variable system
+To index your own product data:
 
-### Data Protection
-- Sensitive data is excluded from the client bundle
-- API requests are made over HTTPS
-- Rate limiting is handled by Algolia's service
+1. Replace or modify `src/data/products.json` with your product data
+2. Ensure your data follows the same structure:
+   ```json
+   {
+     "name": "Product Name",
+     "description": "Product Description",
+     "brand": "Brand Name",
+     "categories": ["Category 1", "Category 2"],
+     "price": 99.99,
+     "image": "image_url",
+     "rating": 4,
+     "popularity": 100
+   }
+   ```
+3. Run the indexing script again
 
-## Performance Optimizations
-
-### Search Performance
-- Proper attribute indexing for fast searches
-- Custom ranking rules for relevant results
-- Faceting optimization for quick filtering
-- Pagination to manage large result sets
-
-### Frontend Performance
-- Code splitting for optimal bundle size
-- Lazy loading of components
-- Efficient state management
-- Debounced search inputs
-- Optimized image loading
-- Minimal CSS bundle using Tailwind's JIT compiler
-
-## Customization
-
-### Styling
-The project uses Tailwind CSS for styling. Customize the design by:
-1. Modifying `tailwind.config.js`
-2. Adding custom CSS in `src/style.css`
-3. Updating component-level styles
-
-### Search Configuration
-Modify search behavior in `src/config/algolia.ts`:
-- Adjust searchable attributes
-- Update faceting options
-- Customize ranking strategy
-- Change results per page
-
-## Contributing
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-MIT License - See LICENSE file for details
