@@ -1,8 +1,46 @@
 {
-  "hash": "5a684d00",
+  "hash": "53d7b3e4",
   "configHash": "2a563112",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "8142f192",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "0dcd52b7",
+  "browserHash": "adafc95f",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "7d7bb517",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "658c7ce6",
+      "needsInterop": true
+    },
+    "react-instantsearch": {
+      "src": "../../node_modules/react-instantsearch/dist/es/index.js",
+      "file": "react-instantsearch.js",
+      "fileHash": "ac76a74b",
+      "needsInterop": false
+    },
+    "algoliasearch/lite": {
+      "src": "../../node_modules/algoliasearch/dist/algoliasearch-lite.umd.js",
+      "file": "algoliasearch_lite.js",
+      "fileHash": "ee745343",
+      "needsInterop": true
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "41d04da8",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-32E4H3EV": {
+      "file": "chunk-32E4H3EV.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
 }
