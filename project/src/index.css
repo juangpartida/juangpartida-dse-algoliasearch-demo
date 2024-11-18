@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-gray-900;
+  }
+}
+
+@layer components {
+  .ais-Hits-list {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .ais-Pagination-list {
+    @apply flex justify-center space-x-1;
+  }
+
+  .ais-Pagination-item {
+    @apply inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md;
+  }
+
+  .ais-Pagination-item--selected {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700;
+  }
+
+  .ais-RefinementList-count {
+    @apply ml-2 text-xs text-gray-500 bg-gray-100 rounded-full px-2 py-0.5;
+  }
+
+  .ais-RefinementList-list {
+    @apply space-y-2;
+  }
+
+  .ais-RefinementList-item {
+    @apply flex items-center;
+  }
+
+  .ais-RefinementList-label {
+    @apply flex items-center w-full cursor-pointer;
+  }
+
+  .ais-RefinementList-checkbox {
+    @apply h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500;
+  }
+
+  .ais-RefinementList-labelText {
+    @apply ml-3 text-sm text-gray-700 flex-grow;
+  }
+
+  .ais-RefinementList-showMore {
+    @apply mt-4 text-sm text-indigo-600 hover:text-indigo-500;
+  }
+}
