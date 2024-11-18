@@ -7,7 +7,7 @@ This technical assignment demonstrates a production-ready search interface with 
 
 <img width="1015" alt="image" src="https://github.com/user-attachments/assets/1968aef3-2b32-48f3-bca6-3453e7f0677e">
 
-Please note, screenshot above is when the App ID, Search Only API Key, and Index Name is active. I have removed these creds from project files. Sharing creds through Greenhouse
+Please note, screenshot above is when the App ID, Search Only API Key, and Index Name is active. 
 
 ## Features
 
